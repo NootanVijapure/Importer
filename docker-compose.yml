@@ -1,0 +1,7 @@
+mongodb:
+  container_name: MONGODB
+  image: mongo:4.0.4
+  ports:
+    - "27017:27019"
+  volumes:
+    - /data/hrdb:/data/db
