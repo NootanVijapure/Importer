@@ -18,18 +18,6 @@ public class ImporterController {
     Producer producer;
 
 	
-/*	@RequestMapping("/send")
-	public String sendMsg(@RequestParam("msg")String msg){
-		producer.produceMsg(msg);
-		return "Done";
-	}*/
-
-	/*@RequestMapping("/importCsv")
-	public String importCsv(@RequestParam("msg")String msg){
-
-		producer.produceMsg(msg);
-		return "imported";
-	}*/
     @PostMapping("/upload")
     public ResponseEntity<String> uploadData(@RequestParam("file") MultipartFile file) throws Exception {
 

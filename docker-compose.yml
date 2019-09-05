@@ -1,7 +1,21 @@
-mongodb:
-  container_name: MONGODB
-  image: mongo:4.0.4
-  ports:
-    - "27017:27019"
-  volumes:
-    - /data/hrdb:/data/db
+  app:
+    build:
+    dockerfile: docker/Dockerfile
+    ports:
+      - "8085-8080"
+    links:
+      - mongo
+    depends_on:
+      - rabbitmq
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+
+

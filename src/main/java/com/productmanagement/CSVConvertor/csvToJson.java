@@ -7,9 +7,19 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 import com.productmanagement.model.Product;
 import com.productmanagement.producer.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ResourceLoaderAware;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import sun.tools.jar.Main;
 
-import java.io.FileReader;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.String.format;
 
 
 public class csvToJson {
@@ -17,15 +27,21 @@ public class csvToJson {
     @Autowired
     Producer producer;
 
+
+    @Autowired
+    ResourceLoader resourceLoader;
+
+
     @SuppressWarnings({"rawtypes", "unchecked"})
     public  List<Product> main() throws Exception
     {
         CsvToBean csv = new CsvToBean();
 
-        String csvFilename = "c:\\files\\dataExample.csv";
-        CSVReader csvReader = new CSVReader(new FileReader(csvFilename));
+        ClassPathResource  res = new ClassPathResource(format(File.separator+"dataExample.csv",File.separator));
+        InputStream inputStream1= res.getInputStream();
 
-        //Set column mapping strategy
+       CSVReader csvReader = new CSVReader(new InputStreamReader(inputStream1));
+
         List list = csv.parse(setColumMapping(), csvReader);
 
         for (Object object : list) {

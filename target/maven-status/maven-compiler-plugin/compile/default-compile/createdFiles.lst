@@ -1,5 +1,6 @@
-com\productmanagement\model\Product.class
 com\productmanagement\producer\Producer.class
 com\productmanagement\SpringProducerApplication.class
 com\productmanagement\controller\ImporterController.class
+com\productmanagement\model\Product.class
+com\productmanagement\config\MongoConfig.class
 com\productmanagement\CSVConvertor\csvToJson.class
