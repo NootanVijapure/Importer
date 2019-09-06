@@ -17,27 +17,16 @@ public class ImporterController {
 	@Autowired
     Producer producer;
 
-	
+
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadData(@RequestParam("file") MultipartFile file) throws Exception {
+    public ResponseEntity<String> uploadData() throws Exception {
 
-        if (file == null) {
-            throw new RuntimeException("You must select the a file for uploading");
-        }
+        csvToJson cvsToJsonObj= new csvToJson();
 
-        InputStream inputStream = file.getInputStream();
-        String originalName = file.getOriginalFilename();
-        String name = file.getName();
-        String contentType = file.getContentType();
-        long size = file.getSize();
-
-        csvToJson cj= new csvToJson();
-
-
-        producer.produceProduct(cj.main());
+        producer.produceProduct(cvsToJsonObj.main());
         // Do processing with uploaded file data in Service layer
 
-        return new ResponseEntity<String>(originalName, HttpStatus.OK);
+        return new ResponseEntity<String>("File uploaded", HttpStatus.OK);
     }
 
     @RequestMapping( "/item" )
